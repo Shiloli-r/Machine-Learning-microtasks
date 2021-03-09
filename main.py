@@ -1,23 +1,15 @@
-threshold = 0.5
-learning_rate = 0.1
-weights = [0, 0, 0]
-training_set = [((1, 0, 0), 1), ((1, 0, 1), 1), ((1, 1, 0), 1), ((1, 1, 1), 0)]
+# import py_perceptron as pyp
+#
+# perceptron = pyp.Perceptron(datasource='heart_data.txt')
+# perceptron.data_description()
+# perceptron.set_weights([0.001, 0.001, 0.001])
+# perceptron.train()
 
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+data_set = np.loadtxt("diabetes_data.txt")
+print(data_set)
 
-def dot_product(values, weights):
-    return sum(value * weight for value, weight in zip(values, weights))
+# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
 
-
-while True:
-    print('-' * 60)
-    error_count = 0
-    for input_vector, desired_output in training_set:
-        print(weights)
-        result = dot_product(input_vector, weights) > threshold
-        error = desired_output - result
-        if error != 0:
-            error_count += 1
-            for index, value in enumerate(input_vector):
-                weights[index] += learning_rate * error * value
-    if error_count == 0:
-        break
